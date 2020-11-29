@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/Usuario');
+const { User } = require('../../models/Usuario');
 const bcrypt = require('bcrypt');
-const service = require('../service/token');
+const service = require('../../service/token');
 
 
-const singUp = router.post('/', async (req, res) => {
+module.exports = router.post('/', async (req, res) => {
     try {
-
-        if(req.body.username == undefined || req.body.password == undefined || req.body.direccion == undefined) {
-            console.log(body)
+        const {username, password, direccion} = req.body
+        
+        if(username == undefined || password == undefined || direccion == undefined) {
             return res.status(403).send({message: `Falta completar campos obligatorios`})
         }
-        
 
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         const user = await User.create(req.body);
@@ -26,7 +25,3 @@ const singUp = router.post('/', async (req, res) => {
 
     }
 });
-
-module.exports = {
-    singUp
-}

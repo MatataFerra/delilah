@@ -1,43 +1,43 @@
 const services = require('../service/token');
+const moment = require('moment')
 
-const tokenExpires = (req, res, next) => {
 
-    if(!req.headers.authorization) {
-        return res.status(403).send({message: 'No tienes autorización'})
+const hasValidToken = async (req, res, next) => {
+
+    try {
+        const tokenJWT = req.headers.authorization
+    
+        if (typeof tokenJWT  !== 'string' ) {
+            res.send({Error: 'Debe ingresar un token'});
+            return;
+        }
+    
+        const tokenCheck = tokenJWT.split(" ")[1];
+    
+        const verifyToken = await services.checkToken(tokenCheck);
+
+        if(verifyToken.decoded.exp <= moment().unix()) {
+            res.json({
+                message: 'El token ha expirado, vuelva a iniciar sesión'
+            })
+            return res.status(404)
+        }
+
+        if(verifyToken) {
+            req.userId = verifyToken.decoded.sub
+            //req.expires = verifyToken.decoded.exp
+            next()
+        }
+
+        return
+    
+    } catch (err) {
+        console.log(err)
+        res.status(err.status).send(err.message)
     }
 
-    const tokenJWT = req.headers.authorization.split(" ")[1];
-
-    services.decodeToken(tokenJWT)
-    .then((response) => {
-        req.user = response;
-        next()
-    })
-    .catch(err => {
-        res.send(err.message)
-    })
-}
-
-const hasValidToken = (req, res, next) => {
-
-    if (typeof req.headers.authorization  !== 'string' ) {
-        res.send({Error: 'Debe ingresar un token'});
-        return;
-    }
-
-    const tokenJWT = req.headers.authorization.split(" ")[1];
-
-    services.checkToken(tokenJWT)
-    .then((response) => {
-        console.log(response.message);
-        next()
-    })
-    .catch(err => {
-        res.send(err.message)
-    })
 }
 
 module.exports = {
-    tokenExpires,
     hasValidToken
 }

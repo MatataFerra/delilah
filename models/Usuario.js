@@ -32,7 +32,10 @@ User.init({
       }
     },
     telefono: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(50),
+      validate: {
+        isNumeric: true
+      }
     },
     direccion: {
       type: DataTypes.STRING,

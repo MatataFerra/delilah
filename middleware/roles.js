@@ -20,22 +20,7 @@ const authUserRole = async (req, res, next) => {
     }
 }
 
-const sameUser = async (req, res, next) => {
-    console.log('ingresando a midd')
-    const user = await User.findOne({ where: {id: req.params._id}});
-
-    if(!user) {
-        return res.status(403).send({message: 'Usuario no registrado'})
-    }
-
-    if (user){
-        next()
-    } 
-    
-    
-}
 
 module.exports = {
     authUserRole,
-    sameUser
 }
