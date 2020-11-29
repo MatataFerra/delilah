@@ -8,7 +8,6 @@ const role = {
 
 class User extends Model{}
 
-
 User.init({
     _id: {
       type: DataTypes.INTEGER,

@@ -21,7 +21,8 @@ module.exports = router.post('/', async (req, res) => {
         return res.status(200);
         
     } catch (error) {
-        console.log({message: error});
+        console.log({message: error.original.message});
+        return res.status(418).send({Error: 'El usuario o el email ya existen'})
 
     }
 });

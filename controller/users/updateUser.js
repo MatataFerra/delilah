@@ -10,7 +10,6 @@ module.exports = router.put('/:_id', async (req, res)=> {
             where: { _id: req.params._id }
         });
 
-
         if(user._id == req.userId) {    
             if(req.body && !req.body.password && !req.body.username){
                 await user.update(req.body)

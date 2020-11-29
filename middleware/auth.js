@@ -1,7 +1,6 @@
 const services = require('../service/token');
 const moment = require('moment')
 
-
 const hasValidToken = async (req, res, next) => {
 
     try {
@@ -25,14 +24,13 @@ const hasValidToken = async (req, res, next) => {
 
         if(verifyToken) {
             req.userId = verifyToken.decoded.sub
-            //req.expires = verifyToken.decoded.exp
             next()
         }
 
         return
     
     } catch (err) {
-        console.log(err)
+        console.log(err.message)
         res.status(err.status).send(err.message)
     }
 

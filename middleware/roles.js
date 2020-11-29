@@ -1,4 +1,5 @@
-const { User, role } = require('../models/Usuario')
+const { User, role } = require('../models/Usuario');
+
 
 const authUserRole = async (req, res, next) => {
     
@@ -9,14 +10,20 @@ const authUserRole = async (req, res, next) => {
             return res.status(403).send({message: 'Usuario no registrado'})
         }
     
-        if ( user.role == role.regular) {
+        if (user.role == role.regular) {
             return res.status(401).send('No puede acceder a este sitio')
+        }
+
+        if (!req.body) {
+            return res.json({
+                Error: 'No ha proporcionado ningún dato'
+            })
         }
 
         next()
 
     } catch (err) {
-        res.send({message: err})
+        res.json({message: err})
     }
 }
 
