@@ -29,5 +29,5 @@ const authUserRole = async (req, res, next) => {
 
 
 module.exports = {
-    authUserRole,
+    authUserRole
 }

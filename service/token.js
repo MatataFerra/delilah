@@ -38,7 +38,8 @@ function checkToken (token) {
         } catch (error) {
             reject({
                 status: 403,
-                message: 'Acceso prohibido'
+                message: 'Acceso prohibido',
+                error: error
             })
         }
     })

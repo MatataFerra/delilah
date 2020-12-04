@@ -12,9 +12,11 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 //Constantes
 const UsersRoute = require('./routes/users');
+const ProductsRoute = require('./routes/products')
 
 //Routes
 app.use('/users', UsersRoute);
+app.use('/products', ProductsRoute)
 
 app.listen(PORT, ()=>{
     console.log('servidor escuchando')

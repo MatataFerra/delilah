@@ -8,7 +8,7 @@ module.exports = router.get('/', async (req, res)=> {
 
         const usuarios = await User.findAll({
             attributes: {
-                exclude: ['password', 'role']
+                exclude: ['password']
             }
         });
         res.send({usuarios: usuarios});

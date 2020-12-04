@@ -8,13 +8,15 @@ const logginUser = require('../controller/users/login');
 const singUp = require('../controller/users/singup');
 const updateUser = require('../controller/users/updateUser');
 const allUsers = require('../controller/users/users');
-const deleteUser = require('../controller/users/deleteUser')
+const deleteUser = require('../controller/users/deleteUser');
+const userById = require('../controller/users/userById')
 
 //default route /users
 router.use('/login', logginUser);
 router.use('/singup', singUp);
 router.use('/update', hasValidToken, updateUser);
-router.use('/delete', hasValidToken, deleteUser)
+router.use('/delete', hasValidToken, deleteUser);
+router.use('/userok', hasValidToken, userById)
 router.use('/', authUserRole, hasValidToken, allUsers);
 
 

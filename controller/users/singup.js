@@ -7,9 +7,9 @@ const service = require('../../service/token');
 
 module.exports = router.post('/', async (req, res) => {
     try {
-        const {username, password, direccion} = req.body
+        const {username, password, adress} = req.body
         
-        if(username == undefined || password == undefined || direccion == undefined) {
+        if(username == undefined || password == undefined || adress == undefined) {
             return res.status(403).send({message: `Falta completar campos obligatorios`})
         }
 
@@ -21,8 +21,8 @@ module.exports = router.post('/', async (req, res) => {
         return res.status(200);
         
     } catch (error) {
-        console.log({message: error.original.message});
-        return res.status(418).send({Error: 'El usuario o el email ya existen'})
+        console.log({message: error.message});
+        return res.status(418).send({Error: error.message})
 
     }
 });

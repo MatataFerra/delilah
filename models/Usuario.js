@@ -19,6 +19,16 @@ User.init({
       allowNull: false,
       unique: true
     },
+
+    name: {
+      type: DataTypes.STRING,
+      defaultValue: 'Estimadx',
+    },
+
+    lastname: {
+      type: DataTypes.STRING,
+    },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false
@@ -30,24 +40,17 @@ User.init({
         isEmail: true
       }
     },
-    telefono: {
+    phone: {
       type: DataTypes.STRING(50),
       validate: {
         isNumeric: true
       }
     },
-    direccion: {
+    adress: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    dateCreated: {
-      type: DataTypes.DATEONLY,
-      defaultValue: Sequelize.NOW,
-    },
-    hourCreated: {
-      type: DataTypes.TIME,
-      defaultValue: Sequelize.NOW
-    },
+    
     role: {
       type: DataTypes.STRING,
       defaultValue: role.regular
