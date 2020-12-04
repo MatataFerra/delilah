@@ -13,4 +13,4 @@ module.exports = router.post('/', async (req, res)=> {
         res.send({Error: err.message})
         return res.status(404)
     }
-})
+});

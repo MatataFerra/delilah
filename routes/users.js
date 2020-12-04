@@ -17,7 +17,7 @@ router.use('/singup', singUp);
 router.use('/update', hasValidToken, updateUser);
 router.use('/delete', hasValidToken, deleteUser);
 router.use('/userok', hasValidToken, userById)
-router.use('/', authUserRole, hasValidToken, allUsers);
+router.use('/', hasValidToken, authUserRole, allUsers);
 
 
 module.exports = router;

@@ -4,7 +4,10 @@ const { User, role } = require('../models/Usuario');
 const authUserRole = async (req, res, next) => {
     
     try {
-        const user = await User.findOne({ where: {email: req.body.email}})
+
+        const userId = req.userId
+        const user = await User.findOne({ where: {_id: userId}})
+
 
         if(!user) {
             return res.status(403).send({message: 'Usuario no registrado'})
