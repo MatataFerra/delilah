@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../../models/Usuario');
+const Order = require('../../models/Order')
 const bcrypt = require('bcrypt');
 const service = require('../../service/token');
 
 module.exports = router.post('/', async (req, res) => {
     try {
-        const user = await User.findOne({ where: {email: req.body.email}})
+        const user = await User.findOne(
+            { where: {email: req.body.email} }
+        )
 
         if(user) {
             const comparedPassword = bcrypt.compareSync(req.body.password, user.password);

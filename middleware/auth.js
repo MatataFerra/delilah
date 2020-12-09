@@ -4,6 +4,9 @@ const moment = require('moment')
 const hasValidToken = async (req, res, next) => {
 
     try {
+
+        //agregar validación para que encuentre el verifyToken.decoded.sub dentro de la base de datos
+        
         const tokenJWT = req.headers.authorization
     
         if (typeof tokenJWT  !== 'string' ) {

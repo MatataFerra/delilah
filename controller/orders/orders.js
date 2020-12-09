@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const Order = require('../../models/Order');
 const Product = require('../../models/Product');
-const Order = require('../../models/Order')
-
 
 module.exports = router.get('/', async (req, res)=> {
     try {
-        const products = await Product.findAll({
-            include: [Order]
+        const orders = await Order.findAll({
+            include: [Product]
         });
-        res.send({productos: products});
+        res.send({orders: orders});
 
     } catch (err) {
         res.json(err)

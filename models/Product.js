@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database/connectionDB');
 
 class Product extends Model{}
@@ -49,12 +49,14 @@ Product.init({
 }, {
     sequelize,
     modelName: 'Product',
-    tableName: 'products'
+    tableName: 'products',
+    timestamps: false
 });
 
-Product.sync({force: false})
-.then(() => {
-  console.log('sincronizadas tabla productos');
-});
+// Product.sync({force: false})
+// .then(() => {
+//   console.log('sincronizadas tabla productos');
+// });
+
 
 module.exports = Product

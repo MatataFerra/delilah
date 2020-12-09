@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database/connectionDB');
 
 const role = {
@@ -59,13 +59,14 @@ User.init({
 }, {
   sequelize,
   modelName: 'User',
-  tableName: 'users'
+  tableName: 'users',
+  timestamps: false
 })
 
-User.sync({force: false})
-.then(() => {
-  console.log('sincronizadas tabla usuario');
-});
+// User.sync({force: false})
+// .then(() => {
+//   console.log('sincronizadas tabla usuario');
+// });
 
 
 module.exports = {User, role}

@@ -4,8 +4,12 @@ require('dotenv').config();
 const sequelize = new Sequelize('delilah', 'root', process.env.DB_PASS, {
     host: '127.0.0.1',
     dialect: 'mysql',
-    port: process.env.DB_PORT || 3306
-});
+    port: process.env.DB_PORT || 3306,
+    logging: false,
+    timestamps: false
+  }
+
+);
 
 (async()=>{
   try {

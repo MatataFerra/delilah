@@ -7,7 +7,7 @@ function createToken (user) {
     const payload = {
         sub: user._id,
         iat: moment().unix(),
-        exp: moment().add(20, 'minutes').unix()
+        exp: moment().add(14, 'days').unix()
     }
 
     return jwt.sign(payload, process.env.SECRET_KEY)
