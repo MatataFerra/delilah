@@ -18,9 +18,5 @@ OrderInUser.init({
     }
 );
 
-// OrderInUser.sync({force: false})
-// .then(() => {
-//   console.log('sincronizadas tabla OrderInUser');
-// });
 
 module.exports = OrderInUser;

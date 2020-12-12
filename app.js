@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({extended: true}))
 //Constantes
 const UsersRoute = require('./routes/users');
 const ProductsRoute = require('./routes/products');
-const OrderRoute = require('./routes/orders')
+const OrderRoute = require('./routes/orders');
 
 //Asocioation & Migrations
-require('./database/asociations');
 require('./database/migrations');
+require('./database/asociations');
 
 
 //Routes

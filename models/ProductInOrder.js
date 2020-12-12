@@ -18,9 +18,5 @@ ProductOrder.init({
     }
 );
 
-// ProductOrder.sync({force: false})
-// .then(() => {
-//   console.log('sincronizadas tabla ProductOrder');
-// });
 
 module.exports = ProductOrder;

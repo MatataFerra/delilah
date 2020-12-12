@@ -53,10 +53,5 @@ Product.init({
     timestamps: false
 });
 
-// Product.sync({force: false})
-// .then(() => {
-//   console.log('sincronizadas tabla productos');
-// });
-
 
 module.exports = Product

@@ -7,7 +7,10 @@ module.exports = router.get('/', async (req, res)=> {
     try {
 
         const usuarios = await User.findAll({
-            include: [Order],
+            include: {
+                model: Order,
+                as: 'orderUser'
+            },
             attributes: {
                 exclude: ['password']
             }

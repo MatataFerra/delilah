@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database/connectionDB');
+const moment = require('moment')
 
 const state = {
     new: 'new',
@@ -15,6 +16,10 @@ const payment = {
     debit: 'debit',
     credit: 'credit',
     ewallet: 'Electronic Wallet'
+}
+
+const time = {
+    now: moment.utc().format('HH:mm:ss')
 }
 
 class Order extends Model{}
@@ -38,6 +43,11 @@ Order.init({
     payment: {
         type: DataTypes.STRING,
         defaultValue: payment.cash
+    },
+
+    time: {
+        type: DataTypes.TIME,
+        defaultValue: time.now
     }
 }, {
     sequelize,
@@ -46,9 +56,5 @@ Order.init({
     timestamps: false,
 });
 
-// Order.sync({force: false})
-// .then(() => {
-//   console.log('sincronizadas tabla de orders');
-// });
 
 module.exports = Order

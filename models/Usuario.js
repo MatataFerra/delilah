@@ -63,10 +63,5 @@ User.init({
   timestamps: false
 })
 
-// User.sync({force: false})
-// .then(() => {
-//   console.log('sincronizadas tabla usuario');
-// });
-
 
 module.exports = {User, role}
