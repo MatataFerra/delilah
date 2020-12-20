@@ -6,8 +6,9 @@ const Product = require('../../models/Product');
 module.exports = router.get('/', async (req, res)=> {
     try {
         const orders = await Order.findAll({
-            include: [Product]
+            include: [{model: Product }]
         });
+
         res.send({orders: orders});
 
     } catch (err) {

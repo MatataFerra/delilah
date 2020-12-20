@@ -4,10 +4,12 @@ const sequelize = require('../database/connectionDB');
 class ProductOrder extends Model{}
 
 ProductOrder.init({
-    _id: { 
+    quantity: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+        defaultValue: 0
+    },
+    subTotal: {
+        type: DataTypes.FLOAT,
     },
 },
     {   
@@ -19,4 +21,4 @@ ProductOrder.init({
 );
 
 
-module.exports = ProductOrder;
+module.exports = ProductOrder

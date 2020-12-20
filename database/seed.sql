@@ -21,5 +21,3 @@ INSERT INTO `delilah`.`productinorder` (`OrderId`, `ProductId`) VALUES ('3', '1'
 INSERT INTO `delilah`.`productinorder` (`OrderId`, `ProductId`) VALUES ('3', '2');
 INSERT INTO `delilah`.`productinorder` (`OrderId`, `ProductId`) VALUES ('1', '2');
 
-INSERT INTO `delilah`.`orderinuser` (`UserId`, `OrderId`) VALUES ('1', '3');
-INSERT INTO `delilah`.`orderinuser` (`UserId`, `OrderId`) VALUES ('1', '2');

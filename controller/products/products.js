@@ -7,11 +7,12 @@ const Order = require('../../models/Order')
 module.exports = router.get('/', async (req, res)=> {
     try {
         const products = await Product.findAll({
-            include: [Order]
+            include: [{model: Order }]
         });
         res.send({productos: products});
 
     } catch (err) {
-        res.json(err)
+        console.log(err);
+        res.send(err)
     }
 });

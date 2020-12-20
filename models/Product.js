@@ -20,7 +20,7 @@ Product.init({
     },
 
     price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
         validate: {
             min: 0,
@@ -28,6 +28,11 @@ Product.init({
                 msg: 'Debe introducir un número válido'
             }
         }
+    },
+
+    instock: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     },
 
     companyname: {

@@ -6,7 +6,9 @@ const sequelize = new Sequelize('delilah', 'root', process.env.DB_PASS, {
     dialect: 'mysql',
     port: process.env.DB_PORT || 3306,
     logging: false,
-    timestamps: false
+    //timestamps: false,
+    timezone: '-03:00',
+    useUTC: false
   }
 
 );
