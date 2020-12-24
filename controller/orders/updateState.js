@@ -1,28 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../../models/Usuario');
-const {Order} = require('../../models/Order');
+const { Order, stateOrder } = require('../../models/Order');
 
 module.exports = router.put('/:_id', async (req, res)=> {
-    try {
-        
 
+    try {
+ 
         const order = await Order.findOne({
             where: { _id: req.params._id }
         });
-
-        if(order) {
-            await order.update(req.body);
+        
+        const { state } = req.body
+        if(order && state in stateOrder) {
+            await order.update(req.body, stateOrder);
             res.json({
-                update: req.body,
+                update: state,
                 message: 'Se ha actualizado con éxito'
             })
-            return res.status(200)
         } else {
-            res.json({Error: 'No cuenta con los permisos para realizar esa operación'});
+            res.json({Error: 'La operación que intenta realizar no es válida'});
             return res.status(403)
         }
     } catch (error) {
+        console.log(error);
         res.status(403).send({Error: error})
     }
+
+    
+
 })

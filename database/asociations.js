@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 const { User } = require('../models/Usuario');
-const Order = require('../models/Order');
+const { Order } = require('../models/Order');
 //const OiU = require('../models/OrderInUser');
 const PiO = require('../models/ProductInOrder');
 //const orderById = require('../controller/orders/orderById');

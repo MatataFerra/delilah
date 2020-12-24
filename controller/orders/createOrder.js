@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Order = require('../../models/Order');
+const { Order, paymentOrder } = require('../../models/Order');
 const { User } = require('../../models/Usuario');
 const Product = require('../../models/Product');
 
@@ -22,6 +22,13 @@ module.exports = router.post('/', async (req, res)=> {
 
         if(!productId){
             return res.status(400).send({Error: '¿Seguro querés que te llevemos nada?, ingresá 1 o más artículos y disfrutá'})
+        }
+
+        if(payment !== payment in paymentOrder){
+            return res.status(403).send({
+                Error: 'El método de pago no es válido, ingrese otro',
+                paymentsMethods: Object.keys(paymentOrder)
+            })
         }
 
         //detect repeat values and sum the equal values, then we created a new array

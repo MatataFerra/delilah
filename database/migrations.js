@@ -1,6 +1,6 @@
 const {User} = require('../models/Usuario');
 const Product = require('../models/Product');
-const Order = require('../models/Order');
+const {Order} = require('../models/Order');
 const PiO = require('../models/ProductInOrder');
 
 const force = false;

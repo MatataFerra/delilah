@@ -2,7 +2,7 @@ const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database/connectionDB');
 const moment = require('moment')
 
-const state = {
+const stateOrder = {
     new: 'new',
     confirm: 'confirm',
     making: 'making',
@@ -11,7 +11,7 @@ const state = {
     cancel: 'cancel'
 }
 
-const payment = {
+const paymentOrder = {
     cash: 'cash',
     debit: 'debit',
     credit: 'credit',
@@ -37,12 +37,12 @@ Order.init({
 
     state: {
         type: DataTypes.STRING,
-        defaultValue: state.new
+        defaultValue: stateOrder.new
     },
 
     payment: {
         type: DataTypes.STRING,
-        defaultValue: payment.cash
+        defaultValue: paymentOrder.cash
     },
 
     time: {
@@ -57,4 +57,8 @@ Order.init({
 });
 
 
-module.exports = Order
+module.exports = {
+    Order,
+    stateOrder,
+    paymentOrder
+}
