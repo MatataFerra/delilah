@@ -37,9 +37,15 @@ module.exports = router.post('/', async (req, res)=> {
         let total = 0;
         let repetedOrders = {}
         let productToCarry = []
-        productId.forEach(elem => {
-            productToCarry.push(elem)
-        })
+
+        if(productId.length == 1) {
+            productToCarry.push(productId)
+        } else {
+            productId.forEach(elem => {
+                productToCarry.push(elem)
+            })
+
+        }
 
         productToCarry.forEach(function(i){
             repetedOrders[i] = (repetedOrders[i] || 0) + 1;

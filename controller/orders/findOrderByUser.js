@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {Order} = require('../../models/Order');
+const { Order } = require('../../models/Order');
 const {User} = require('../../models/Usuario');
 const Product = require('../../models/Product');
 
@@ -8,6 +8,7 @@ const Product = require('../../models/Product');
 module.exports = router.get('/', async (req, res) => {
     try {
         const users = await User.findAll({
+            
             include: [
                 {
                     model: Order,
@@ -15,19 +16,17 @@ module.exports = router.get('/', async (req, res) => {
                     attributes:[
                         'state', 'total', 'payment',
                     ],
-                    order: ['state', 'DESC']
                     
-                    
-                , include: [
+                    include: [
                     {model: Product,
-                        attributes: ['productname', 'description', 'price', 'img'],
+                        attributes: ['productname', 'description', 'price', 'img']
                     }
                 ]},
 
             ],
-           
+            order: [['orderUser', 'state', 'DESC']],
             attributes: [ 'username', 'phone', 'adress'],
-            nest: true,
+
             
         })
 

@@ -19,7 +19,7 @@ router.use('/delete', hasValidToken, userExits, deleteOrder);
 router.use('/update', hasValidToken, userExits, updateOrder)
 router.use('/create',hasValidToken, userExits, createOrder);
 router.use('/state', hasValidToken, userExits, authUserRole, updateState);
-router.use('/userorder', findOrderByUser)
+router.use('/userorder', hasValidToken, userExits, hasValidToken, findOrderByUser)
 
 
 module.exports = router;
