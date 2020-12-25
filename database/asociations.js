@@ -11,6 +11,8 @@ console.log('iniciando relaciones entre tablas');
 User.hasMany(Order, {as: 'orderUser', foreignKey: 'orderByUserId'});
 Order.belongsTo(User, {as: 'orderUser', foreignKey: 'orderByUserId'});
 
+
+
 //M a M
 Order.belongsToMany(Product, {through: PiO});
 Product.belongsToMany(Order, {through: PiO});

@@ -4,31 +4,37 @@ const {Order} = require('../../models/Order');
 const {User} = require('../../models/Usuario');
 const Product = require('../../models/Product');
 
-const ProductOrder = require('../../models/ProductInOrder')
 
 module.exports = router.get('/', async (req, res) => {
     try {
-        const orders = await Order.findAll({
+        const users = await User.findAll({
             include: [
-                {model: Product, attributes:[
-                    'productname',
-                    'price',
-                    'img',
+                {
+                    model: Order,
+                    as: 'orderUser',
+                    attributes:[
+                        'state', 'total', 'payment',
+                    ],
+                    order: ['state', 'DESC']
+                    
+                    
+                , include: [
+                    {model: Product,
+                        attributes: ['productname', 'description', 'price', 'img'],
+                    }
                 ]},
-                
+
             ],
-            order: [
-                ['state', 'DESC'],
-                ['time', 'DESC']
-            ],
-            attributes: ['state', 'total', 'payment']
-        });
+           
+            attributes: [ 'username', 'phone', 'adress'],
+            nest: true,
+            
+        })
 
-        console.log(orders);
-
-        res.send({orders: orders});
-
+        res.send({Orders: users})
+        
     } catch (err) {
-        res.json(err)
+        console.log(err);
+        res.send(err)
     }
 })

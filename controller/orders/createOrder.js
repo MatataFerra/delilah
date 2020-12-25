@@ -23,8 +23,9 @@ module.exports = router.post('/', async (req, res)=> {
         if(!productId){
             return res.status(400).send({Error: '¿Seguro querés que te llevemos nada?, ingresá 1 o más artículos y disfrutá'})
         }
+        const paymentName = Object.getOwnPropertyNames(paymentOrder).find(pay => pay === payment)
 
-        if(payment !== payment in paymentOrder){
+        if(payment !== paymentName){
             return res.status(403).send({
                 Error: 'El método de pago no es válido, ingrese otro',
                 paymentsMethods: Object.keys(paymentOrder)
@@ -36,20 +37,21 @@ module.exports = router.post('/', async (req, res)=> {
         let total = 0;
         let repetedOrders = {}
         let productToCarry = []
-        productToCarry.push(productId)
+        productId.forEach(elem => {
+            productToCarry.push(elem)
+        })
 
         productToCarry.forEach(function(i){
             repetedOrders[i] = (repetedOrders[i] || 0) + 1;
         });
         
 
-        const AllProductsId = productTest.reduce((accumulator, current) => {
+        const AllProductsId = productToCarry.reduce((accumulator, current) => {
             if (!accumulator) return [current];
 
             const dish = accumulator.find(d => d === current);
             if (!dish) {
                 accumulator.push(current);
-                console.log(accumulator);
                 return accumulator;
             } else {
                 return accumulator;
@@ -57,6 +59,7 @@ module.exports = router.post('/', async (req, res)=> {
         }, undefined);
 
         for(let i = 0; i < AllProductsId.length; i++){
+
             const product = await Product.findByPk(AllProductsId[i]);
             const oneProduct = product._id;
             const productPrice = await Product.findOne({attributes: ['price'], where: {_id: oneProduct}});
