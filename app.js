@@ -21,9 +21,10 @@ require('./database/asociations');
 
 
 //Routes
-app.use('/users', UsersRoute);
-app.use('/products', ProductsRoute);
-app.use('/orders', OrderRoute);
+const apiRoute = "/api/v1";
+app.use(apiRoute + '/users', UsersRoute);
+app.use(apiRoute+ '/products', ProductsRoute);
+app.use(apiRoute + '/orders', OrderRoute);
 
 
 

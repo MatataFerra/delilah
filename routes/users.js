@@ -15,8 +15,8 @@ const userById = require('../controller/users/userById')
 router.use('/login', logginUser);
 router.use('/singup', singUp);
 router.use('/update', hasValidToken, updateUser);
-router.use('/delete', hasValidToken, deleteUser);
-router.use('/userok', hasValidToken, userById)
+router.use('/delete', hasValidToken, authUserRole, deleteUser);
+router.use('/userById', hasValidToken, userById)
 router.use('/', hasValidToken, authUserRole, allUsers);
 
 
