@@ -44,6 +44,21 @@ PORT= **Por defecto 3000, puerto que se conecta el servidor**
 
 *RECUERDE*: Los nombres de los campos (ej: DB_NAME, etc) NO DEBEN ALTERARSE, ya que configuran la conexión a la Base de datos
 
+#### Ejemplo de cómo configurar el archivo .env
+*No deben haber espacios, ni comillas, ni comas*. Tome como referencia la configuración de muestra:
+
+```bash
+DB_NAME=delilah
+DB_USER=matata
+DB_PASS=1234
+DB_HOST=127.0.0.1
+DB_DIALECT=mysql
+DB_PORT=3306
+SECRET_KEY=claveMuySecreta
+PORT=3000
+```
+
+
 ### 2. Base de Datos
 
 1. Puede instalar la base de datos que desea XAMPP, MariaDB, Worbench MySQL de ORACLE o bien en un servidor externo.
