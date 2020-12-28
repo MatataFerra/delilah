@@ -2,6 +2,9 @@ const {User} = require('../models/Usuario');
 const Product = require('../models/Product');
 const {Order} = require('../models/Order');
 const PiO = require('../models/ProductInOrder');
+const Fav = require('../models/favProduct')
+
+
 
 const force = false;
 
@@ -10,6 +13,8 @@ const force = false;
     await Order.sync({force: force});
     await Product.sync({force: force});
     await PiO.sync({force: force});
+    await Fav.sync({force: force})
+
 })().then(console.log('Sync Exitoso'))
 .catch(err => {
     console.log(err);

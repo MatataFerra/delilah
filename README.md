@@ -50,8 +50,11 @@ PORT= **Por defecto 3000, puerto que se conecta el servidor**
 
 Una vez instalada la base de datos y configurado el archivo *.env*, La aplicación creará automáticamente tanto la Base de Datos, las tablas y las relaciones.
 
+En caso de ejecutar las Querys del archivo **seed** también se crearán las tablas y las relaciones, además de los datos necesarios para comenzar a usar la base de datos
+
 *IMPORTANTE*
-Es necesario que usted ingrese datos a la base de datos. Puede utilizar las Querys proveidas en el archivo **seed.sql** para crear datos. O bien puede hacerlo a través de [POSTMAN](https://www.postman.com/downloads/)
+Es necesario que usted ingrese datos a la base de datos, puede hacerlo a través de [POSTMAN](https://www.postman.com/downloads/) con los métodos que figuran más abajo
+También puede crear datos de manera masiva ingresando el comando *npm run initData*, automaticamente se crearán datos para comenzar a usar la app
 
 2. Los campos de las tablas son:
 
@@ -97,33 +100,35 @@ Empecemos probando la aplicación
 
 ## Endpoints
 
+
 *Base URL*: localhost:3000/api/v1
-| Method |       Enpoint      |                  Descripcion                  |
-|--------|--------------------|-----------------------------------------------|
-|   POST | /users/login       | Da un Token Bearer (con email y pass)         |
-|   GET  | /users             | Obtener todos los usuarios(solo admin)        |
-|  POST  | /users//singup     | Crear un usario                               |
-|   GET  |/users/userById/{id}| Obtener info del user                         |
-|   PUT  | /users/update/{id} | Editar user info                              |
-| DELETE | /users/{id}        | Eliminar user(solo admin)                     |
-|  *GET* | /users/{id}/dishes | Get user's favourites dishes                  |
-|   GET  | /products          | Mostrar todos los productos                   |
-|  POST  | /products/create   | Crear nuevo producto                          |
-|   GET  | /products/id/{id}  | Obtener info de un producto                   |
-|   PUT  |/products/update/id | Editar un producto *el id es un número*       |
-| DELETE |/products/delete/id | Borrar un producto *el id es un número*       |
-|   GET  | /orders            | Ver todas las ordenes (solo admin)            |
-|  POST  | /orders/create     | crear nueva orden                             |
-|   GET  | /orders/id/{id}    | Ver info de una orden                         |
-|   PUT  | /orders/update/{id}| Actualizar Orden                              |
-|DELETE  | /orders/delete/{id}| Borrar orden                                  |
-|   PUT  | /orders/state/{id} | Actualizar estado de orden (solo admin)       |
-|   GET  |/orders/userorder/id| Ver ordenes y estado del usuario              |
+*el {id} es un número*
+| Method |       Enpoint        |                  Descripcion                  |
+|--------|----------------------|-----------------------------------------------|
+|   POST | /users/login         | Da un Token Bearer (con email y pass)         |
+|   GET  | /users               | Obtener todos los usuarios(solo admin)        |
+|  POST  | /users//singup       | Crear un usario                               |
+|   GET  |/users/userById/{id}  | Obtener info del user                         |
+|   PUT  | /users/update/{id}   | Editar user info                              |
+| DELETE | /users/{id}          | Eliminar user(solo admin)                     |
+|  GET   | /users/favs          | Obtener fav products del usuario registrado   |
+|  POST  | /users/favs          | agregar fav products al usuario registrado    |
+|   GET  | /products            | Mostrar todos los productos                   |
+|  POST  | /products/create     | Crear nuevo producto                          |
+|   GET  | /products/id/{id}    | Obtener info de un producto                   |
+|   PUT  |/products/update/{id} | Editar un producto                            |
+| DELETE |/products/delete/{id} | Borrar un producto                            |
+|   GET  | /orders              | Ver todas las ordenes (solo admin)            |
+|  POST  | /orders/create       | crear nueva orden                             |
+|   GET  | /orders/id/{id}      | Ver info de una orden                         |
+|   PUT  | /orders/update/{id}  | Actualizar Orden                              |
+|DELETE  | /orders/delete/{id}  | Borrar orden                                  |
+|   PUT  | /orders/state/{id}   | Actualizar estado de orden (solo admin)       |
+|   GET  |/orders/userorder/id  | Las nuevas ordenes aparecen primero           |
 
 
 ## NPM Packages
 - [Express](http://expressjs.com) : Framework that provides an easy-way to handle request and managing routes.
-- [express-validator](https://express-validator.github.io/) : For validation and sanitization of request's body and query params.
 - [nodemon](https://www.npmjs.com/package/nodemon) : Used in dev instance for fast server reloading.
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) : Creation and validation of [JWT](https://jwt.io) authorization method.
 - [dotenv](https://www.npmjs.com/package/dotenv) : Used to protect JWT passphrase. 

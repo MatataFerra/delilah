@@ -18,8 +18,9 @@ const paymentOrder = {
     ewallet: 'Electronic Wallet'
 }
 
+
 const time = {
-    now: moment.utc().format('HH:mm:ss')
+    now: moment().format('HH:mm:ss')
 }
 
 class Order extends Model{}
@@ -60,5 +61,6 @@ Order.init({
 module.exports = {
     Order,
     stateOrder,
-    paymentOrder
+    paymentOrder,
+    time
 }

@@ -15,6 +15,12 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   try {
       await sequelize.authenticate();
       console.log('Conexión exitosa a la DB');
+      if (process.argv.includes('--initData')) {
+        const {init} = require('../database/init')
+        init()
+            .then(init => console.log("Data creada con éxito"))
+            .catch(error => console.log("Population couldn't be done", error));
+    }
     } catch (error) {
       console.log('No se pudo conectar a la DB:');
       console.log(error);

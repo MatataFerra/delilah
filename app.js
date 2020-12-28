@@ -3,6 +3,9 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const moment = require('moment');
+const time = moment().format('HH:mm:ss')
+
 require('./database/connectionDB');
 require('dotenv').config();
 
@@ -29,6 +32,6 @@ app.use(apiRoute + '/orders', OrderRoute);
 
 
 app.listen(PORT, ()=>{
-    console.log('servidor escuchando')
+    console.log('servidor iniciando, hora del servidor ' + time)
     
 })
