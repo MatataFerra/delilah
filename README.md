@@ -122,7 +122,7 @@ Empecemos probando la aplicación
 |--------|----------------------|-----------------------------------------------|
 |   POST | /users/login         | Da un Token Bearer (con email y pass)         |
 |   GET  | /users               | Obtener todos los usuarios(solo admin)        |
-|  POST  | /users//singup       | Crear un usario                               |
+|  POST  | /users/singup        | Crear un usario                               |
 |   GET  |/users/userById/{id}  | Obtener info del user                         |
 |   PUT  | /users/update/{id}   | Editar user info                              |
 | DELETE | /users/{id}          | Eliminar user(solo admin)                     |
@@ -130,16 +130,16 @@ Empecemos probando la aplicación
 |  POST  | /users/favs          | agregar fav products al usuario registrado    |
 |   GET  | /products            | Mostrar todos los productos                   |
 |  POST  | /products/create     | Crear nuevo producto                          |
-|   GET  | /products/id/{id}    | Obtener info de un producto                   |
+|   GET  | /products/{id}       | Obtener info de un producto                   |
 |   PUT  |/products/update/{id} | Editar un producto                            |
 | DELETE |/products/delete/{id} | Borrar un producto                            |
 |   GET  | /orders              | Ver todas las ordenes (solo admin)            |
 |  POST  | /orders/create       | crear nueva orden                             |
-|   GET  | /orders/id/{id}      | Ver info de una orden                         |
+|   GET  | /orders/{id}         | Ver info de una orden                         |
 |   PUT  | /orders/update/{id}  | Actualizar Orden                              |
 |DELETE  | /orders/delete/{id}  | Borrar orden                                  |
 |   PUT  | /orders/state/{id}   | Actualizar estado de orden (solo admin)       |
-|   GET  |/orders/userorder/id  | Las nuevas ordenes aparecen primero           |
+|   GET  |/orders/userorder/{id}| Las nuevas ordenes aparecen primero           |
 
 
 ## NPM Packages

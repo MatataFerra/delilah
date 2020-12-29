@@ -9,12 +9,13 @@ const productById = require('../controller/products/productById')
 
 const { authUserRole  } = require('../middleware/roles');
 const { hasValidToken } = require('../middleware/auth');
+const {userExits} = require('../middleware/userExist')
 
 router.use('/', allProducts);
-router.use('/id', productById)
-router.use('/delete', hasValidToken, deleteProduct);
-router.use('/update', hasValidToken, updateProduct)
-router.use('/create',hasValidToken, authUserRole, createProduct);
+router.use('/', productById)
+router.use('/delete', hasValidToken, userExits, authUserRole, deleteProduct);
+router.use('/update', hasValidToken, userExits, authUserRole, updateProduct)
+router.use('/create',hasValidToken, userExits, authUserRole, createProduct);
 
 
 module.exports = router

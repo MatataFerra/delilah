@@ -1,0 +1,529 @@
+---
+swagger: "2.0"
+info:
+  description: API Delilah-Resto
+  version: 1.0.0
+  title: Delilah Resto API
+  contact:
+    email: matataferra@github.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /matataferra89/delilah-resto/1.0.0
+tags:
+- name: User
+- name: Products
+- name: Orders
+schemes:
+- https
+paths:
+  /users:
+    get:
+      tags:
+      - User
+      summary: Find all users
+      description: |
+        Only ADMIN By passing in the appropriate options, you can search for all user registered
+      operationId: userId
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Search results users
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: bad input parameter
+  /users/login:
+    post:
+      tags:
+      - User
+      summary: Loggin and server provided with token
+      description: all user can loggin in and all of them can get the token wich is necesary to access
+      parameters:
+      - name: email
+        in: query
+        description: admin email example matataferra@gmail.com
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: pass admin password example 1234
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Token'
+        "403":
+          description: Forbidden
+  /users/singup:
+    post:
+      tags:
+      - User
+      summary: Loggin and server provided with token
+      description: Users can create their accounts. By default the user role is regular, if you use this feature you must know which one is your admin user and set manually
+      parameters:
+      - in: body
+        name: user
+        description: The user to create.
+        required: false
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Wrong parameter
+  /users/userById/{id}:
+    get:
+      tags:
+      - User
+      summary: Find users by id
+      description: You can find one user when you put into the path the id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: User not found
+  /users/update/{id}:
+    put:
+      tags:
+      - User
+      summary: Update users by id
+      description: You can update one user when you put into the path the id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /users/{id}:
+    delete:
+      tags:
+      - User
+      summary: Delete users by id
+      description: You can delete one user when you put into the path the id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /users/favs:
+    get:
+      tags:
+      - User
+      summary: Find all users favs
+      description: with the token you can find your fav products
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Search users fav
+        "400":
+          description: bad input parameter
+  /favs:
+    post:
+      tags:
+      - User
+      summary: Create users favs
+      description: the right path is /users/favs. with the token you can create your fav products
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Add a favourite product
+        "400":
+          description: bad input parameter
+  /products:
+    get:
+      tags:
+      - Products
+      summary: Find all product
+      description: all users can find all products, but they must be logged in
+      operationId: productId
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Search results products
+          schema:
+            $ref: '#/definitions/Product'
+        "400":
+          description: bad input parameter
+  /products/create:
+    post:
+      tags:
+      - Products
+      summary: Only admin can create a product
+      description: idem
+      parameters:
+      - in: body
+        name: product
+        description: The product to create.
+        required: false
+        schema:
+          $ref: '#/definitions/Product'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Wrong parameter
+  /products/{id}:
+    get:
+      tags:
+      - Products
+      summary: Find prodcuts by id
+      description: You can find one product when you put into the path of the id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Product not found
+  /products/update/{id}:
+    put:
+      tags:
+      - Products
+      summary: Update product by id
+      description: You can update one product when you put into the path the id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /products/delete/{id}:
+    delete:
+      tags:
+      - Products
+      summary: Delete prodcut by id
+      description: You can delete one product when you put the id into the path
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /orders:
+    get:
+      tags:
+      - Orders
+      summary: Find all product
+      description: only admin can find all orders
+      operationId: orderId
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Search results orders
+          schema:
+            $ref: '#/definitions/Order'
+        "400":
+          description: bad input parameter
+  /orders/create:
+    post:
+      tags:
+      - Orders
+      summary: All users can create an order
+      description: Any user can select any product and then they sum, at the end you have the total
+      parameters:
+      - in: body
+        name: order
+        description: The order to create.
+        required: false
+        schema:
+          $ref: '#/definitions/Order'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Wrong parameter
+  /orders/{id}:
+    get:
+      tags:
+      - Orders
+      summary: Find orders by id.
+      description: The API find the user who is doing this request and tray to match the order id whith the user id, if they are equal the user can see his own order
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Product not found
+  /orders/update/{id}:
+    put:
+      tags:
+      - Orders
+      summary: Update an order by id
+      description: You can update one order when you put the id into the path
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /orders/delete/{id}:
+    delete:
+      tags:
+      - Orders
+      summary: Delete Order by id
+      description: You can delete one order when you put the id into the path
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /orders/state/{id}:
+    put:
+      tags:
+      - Orders
+      summary: Update the state of an order by id
+      description: Its important when you want to update the state new to confirm, or confirm to received even you can change the state to cancel. You can do that with this featured
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: not allowed, or user is not the admin
+  /orders/userorder/{id}:
+    get:
+      tags:
+      - Orders
+      summary: Find the user who make the orders.
+      description: the user can consult whit de API which is his own order or orders.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: token
+        in: header
+        description: Bearer token
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Order not found
+definitions:
+  User:
+    type: object
+    required:
+    - _id
+    - adress
+    - email
+    - lastname
+    - name
+    - password
+    - phone
+    - role
+    - username
+    properties:
+      _id:
+        type: integer
+        format: uuid
+        example: 1
+      username:
+        type: string
+        example: MatataFerra
+      name:
+        type: string
+        example: Matías
+      lastname:
+        type: string
+        example: Ferraro
+      password:
+        type: string
+        example: $2y$10$xeFLlm.r/oMtqUxhpB0VI.7qNsC3oCAuxzEeHjApeYtYHXXLayxX6
+      email:
+        type: string
+        example: matataferra@gmail.com
+      adress:
+        type: string
+        example: Ceretti 3200
+      phone:
+        type: string
+        example: +54 9 11 7856 9875
+      role:
+        type: string
+        example: admin
+  Token:
+    type: object
+    properties:
+      message:
+        type: string
+        example: Loggeado correctamente
+      token:
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYwOTI2ODU0NCwiZXhwIjoxNjEwNDc4MTQ0fQ.SjyCmuc9a-voKQJQIQpp1v0Ph_P5OQWtghL1NEOWFhc
+  Product:
+    type: object
+    required:
+    - _id
+    - companyadress
+    - companyname
+    - description
+    - img
+    - instock
+    - price
+    - productname
+    properties:
+      _id:
+        type: integer
+        format: uuid
+        example: 1
+      productname:
+        type: string
+        example: Pizza
+      description:
+        type: string
+        example: Provolone
+      price:
+        type: integer
+        example: 150
+      instock:
+        type: boolean
+        example: true
+      companyname:
+        type: string
+        example: Aldo the apache
+      companyadress:
+        type: string
+        example: Ceretti 3596
+      img:
+        type: string
+        example: https://cutt.ly/Wh70A31
+  Order:
+    type: object
+    required:
+    - _id
+    - payment
+    - products
+    - state
+    - total
+    properties:
+      _id:
+        type: integer
+        format: uuid
+        example: 1
+      total:
+        type: integer
+        example: 350
+      state:
+        type: string
+        example: new
+      payment:
+        type: string
+        example: cash
+      products:
+        $ref: '#/definitions/Product'
